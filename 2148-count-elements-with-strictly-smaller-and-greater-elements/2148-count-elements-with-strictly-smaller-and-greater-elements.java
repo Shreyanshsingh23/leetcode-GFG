@@ -19,7 +19,7 @@ class Solution {
                     }
                 }
             }
-         if(bool1 == true&& bool2==true){
+         if(bool1 && bool2){
              count ++;
          }   
         }
