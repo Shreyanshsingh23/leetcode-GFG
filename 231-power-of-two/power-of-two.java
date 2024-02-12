@@ -4,8 +4,23 @@ class Solution {
             return true;
         }
         
-        boolean bool = check(n,1);
+      //  boolean bool = check(n,1);
+          boolean bool = checkByBitOperator(n);
         return bool;
+    }
+
+    static boolean checkByBitOperator(int n){
+       long n1 = (long) n;
+       
+       if(n==0){
+           return false;
+       }
+       
+        long ans = n1 & n1-1;
+        if(ans == 0){
+            return true;
+        }
+        return false;
     }
     
     static boolean check(int n, int x){
