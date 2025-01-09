@@ -14,16 +14,15 @@ public:
                 cur = "";num = 0;
             }
             else if(e == ']'){
-                string lst = "";
-                int cnt = 0;
-                pair<string,int> p  = st.top();
-                lst = p.first;cnt = p.second;
+                
+                auto [lst,cnt]  = st.top();
+                
                 st.pop();
-                string temp = cur;
-                cur = lst;
+                string repeated = "";
                  for(int i = 0;i < cnt; ++i){
-                    cur += temp;
+                   repeated += cur;
                  }
+                 cur = lst + repeated;
             }
             else cur += e;
         }
