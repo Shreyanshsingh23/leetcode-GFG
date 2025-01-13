@@ -1,34 +1,26 @@
 #define pb push_back
 class Solution {
 public:
+    vector<string> ans;
+    
+    void rec(int n, string s, int l, int r){
+        //positive basecase
+        if(l == n and r == n){ 
+            ans.pb(s);
+            return;
+        }
+        //negative basecase
+        if(l > n or r > n or r > l){
+            return;
+        }
+
+
+        rec(n,s+'(', l+1, r);
+        rec(n,s+')', l , r+1);
+    }
+
     vector<string> generateParenthesis(int n) {
-        if(n == 1){
-            vector<string> ans;
-            ans.pb("()");
-            return ans;
-        }
-
-        vector<string> prev = generateParenthesis(n-1);
-        vector<string> ans;
-        set<string> st;
-        string t = "()";
-        for(auto e : prev){
-            for(int i = 0; i < e.size(); ++i){
-                string left = e.substr(0,i);
-                // cout << "l: " << left << endl;
-                string right = e.substr(i);
-                // cout << "r: " << right << endl;
-                string res = left;
-                res += t;
-                res += right;
-                st.insert(res);
-            }
-        }
-
-        for(auto e : st){
-            ans.pb(e);
-        }
-
-        return ans;
+       rec(n,"", 0, 0);
+       return ans;
     }
 };
