@@ -1,31 +1,33 @@
-#define pb push_back
 class Solution {
 public:
-    vector<string> ans;
-    
-    void rec(int n, string& s, int l, int r){
-        //positive basecase
-        if(l == n and r == n){ 
-            ans.pb(s);
-            return;
-        }
-        //negative basecase
-       
-        if(l < n) {
-            s += "(";
-            rec(n,s, l+1, r);
-            s.pop_back();
-        }
-        if(r < n and r < l) {
-            s += ")";
-            rec(n,s, l, r+1);
-            s.pop_back();
+void f(int open, int close,string &current ,vector<string>&result)
+{
+    if(open==0 && close==0)
+    {
+        result.push_back(current);
+        return;
+    }
+    if(open>0)
+    {
+        current.push_back('(');
+        f(open-1,close,current,result);
+        current.pop_back();
+    }
+    if(close>0)
+    {
+        if(close>open)
+        {
+            current.push_back(')');
+            f(open,close-1,current,result);
+            current.pop_back();
         }
     }
-
-    vector<string> generateParenthesis(int n) {
-        string t = "";
-       rec(n,t, 0, 0);
-       return ans;
+}
+    vector<string> generateParenthesis(int n) 
+    {
+        string current ;
+        vector<string>result;
+        f(n,n,current,result);
+        return result;
     }
 };
