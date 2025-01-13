@@ -1,30 +1,24 @@
 #define pb push_back
 class Solution {
 public:
-    vector<vector<int>> ans;
-
-    void rec(vector<int> a, vector<int> curr){
-       if(a.size() == 0){
-        ans.pb(curr);
-        curr = {};
-        return;
-       }
-
-        int n = a.size();
-       for(int i = 0; i < n; ++i){
-        int element = a[i];
-        vector<int> temp;
-        for(int j = 0; j < n; ++j){
-            if(j != i)temp.pb(a[j]);
+    int n;
+    void rec(int i, vector<vector<int>>& ans, vector<int>& curr){
+        if(i == n){
+            ans.pb(curr);
+            return;
         }
-        curr.pb(element);
-        rec(temp,curr);
-        curr.pop_back();
-       }
+
+        for(int j = i; j < n; ++j){
+            swap(curr[i],curr[j]);
+            rec(i+1,ans,curr);
+            swap(curr[i],curr[j]);
+
+        }
     }
     vector<vector<int>> permute(vector<int>& nums) {
-        vector<int> temp;
-        rec(nums,temp);
+        vector<vector<int>> ans;
+        n = nums.size();
+        rec(0,ans,nums);
         return ans;
     }
 };
