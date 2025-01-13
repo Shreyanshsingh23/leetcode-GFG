@@ -3,7 +3,7 @@ class Solution {
 public:
     vector<string> ans;
     
-    void rec(int n, string s, int l, int r){
+    void rec(int n, string& s, int l, int r){
         //positive basecase
         if(l == n and r == n){ 
             ans.pb(s);
@@ -11,15 +11,21 @@ public:
         }
         //negative basecase
        
-        if(l < n)
-        rec(n,s+'(', l+1, r);
-        if(r < n and r < l)
-        rec(n,s+')', l , r+1);
-
+        if(l < n) {
+            s += "(";
+            rec(n,s, l+1, r);
+            s.pop_back();
+        }
+        if(r < n and r < l) {
+            s += ")";
+            rec(n,s, l, r+1);
+            s.pop_back();
+        }
     }
 
     vector<string> generateParenthesis(int n) {
-       rec(n,"", 0, 0);
+        string t = "";
+       rec(n,t, 0, 0);
        return ans;
     }
 };
