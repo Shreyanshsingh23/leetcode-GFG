@@ -6,23 +6,19 @@ public:
     set<pair<int,int>> st;
     void rec(vector<vector<int>>& a,int i , int j){
         int n = a.size(), m = a[0].size();
-        // if(i < 0 or i >= a.size() or j < 0 or j >= a[0].size()){
-        //     ans.pb(1);
-        //     return;
-        // }
-        // if(a[i][j] == 0){
-        //     ans.pb(1);
-        //     return;
-        // }
+        if(i < 0 or i >= a.size() or j < 0 or j >= a[0].size()){
+            ans.pb(1);
+            return;
+        }
+        if(a[i][j] == 0){
+            ans.pb(1);
+            return;
+        }
         st.insert({i,j});
-        if(i+1 >= n or a[i+1][j] == 0)ans.pb(1);
-        else if(!st.count({i+1,j})) rec(a,i+1,j);
-        if(i-1 < 0 or a[i-1][j] == 0)ans.pb(1);
-        else  if(!st.count({i-1,j})) rec(a,i-1,j);
-        if(j+1 >= m or a[i][j+1] == 0)ans.pb(1);
-        else  if(!st.count({i,j+1})) rec(a,i,j+1);
-        if(j-1 < 0 or a[i][j-1] == 0)ans.pb(1);
-        else  if(!st.count({i,j-1})) rec(a,i,j-1);
+        if(!st.count({i+1,j})) rec(a,i+1,j);
+        if(!st.count({i-1,j})) rec(a,i-1,j);
+        if(!st.count({i,j+1})) rec(a,i,j+1);
+        if(!st.count({i,j-1})) rec(a,i,j-1);
     }
     int islandPerimeter(vector<vector<int>>& grid) {
         int x,y;
