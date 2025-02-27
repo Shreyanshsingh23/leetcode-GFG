@@ -19,6 +19,7 @@ public:
     }
     int distributeCookies(vector<int>& a, int k) {
         ans.resize(k,0);
+        sort(a.rbegin(),a.rend());
 
         return f(a,k,0);
     }
