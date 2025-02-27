@@ -1,21 +1,19 @@
 class Solution {
 public:
- string revInv(string s)
-    { for(int i=0;i<s.size();i++){
-        s[i]=='1'?s[i]='0':s[i]='1';
-    }
-    return s;
+    int f(int n, int k)
+    {
+        if(n == 1)return 0;
+        if(k == (1 << (n-1)))return 1;
 
-    } 
-        
-    char findKthBit(int n, int k) {
-        string s = "0";
-        for(int i = 0; i < n; i++){
-            string inv = revInv(s);
-            reverse(inv.begin(),inv.end());
-            s += "1" + inv;
-
+        if(k > (1 << (n-1))){
+            return 1 - f(n-1,(1 << (n-1)) - (k - (1 << (n-1))));
         }
-        return s[k-1];
+        else return f(n-1,k);
+    }
+
+    char findKthBit(int n, int k) {
+        int ans = f(n,k);
+        cout << ans << endl;
+        return ans + '0';
     }
 };
