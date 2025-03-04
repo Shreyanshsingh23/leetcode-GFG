@@ -10,15 +10,13 @@
  */
 class Solution {
     public ListNode mergeInBetween(ListNode list1, int a, int b, ListNode list2) {
-        int i = 0;
         ListNode dummy = new ListNode(-1);
         ListNode tail = dummy;
         ListNode cur = list1;
-        while(i < a){
+        for(int i = 0; i < a; ++i){
             tail.next = cur;
             tail = cur;
             cur = cur.next;
-            ++i;
         }
 
         ListNode cur2 = list2;
@@ -28,16 +26,11 @@ class Solution {
             cur2 = cur2.next;
         }
 
-         while(i <= b){
+         for(int i = a; i <= b; ++i){
             cur = cur.next;
-            ++i;
         }
 
-        while(cur != null){
-            tail.next = cur;
-            tail = cur;
-            cur = cur.next;
-        }
+        tail.next = cur;
 
         return dummy.next;
 
