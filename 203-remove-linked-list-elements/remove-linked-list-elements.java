@@ -18,7 +18,7 @@ class Solution {
                 tail.next = cur;
                 tail = cur;
             }
-            cur = cur.next;
+            cur = cur.next; // original list wala pointer to hamesha forward move karega
         }
 
         tail.next = null;
