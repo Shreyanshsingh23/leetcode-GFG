@@ -31,6 +31,7 @@ class Solution {
         }
 
         tail.next = cur;
+        //Aage ke links dubara jodna jaruri nhi hai bss ek to tail se jod do baaki toh jude hi hain
 
         return dummy.next;
 
