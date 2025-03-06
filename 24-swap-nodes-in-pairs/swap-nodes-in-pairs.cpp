@@ -12,24 +12,18 @@ class Solution {
 public:
     ListNode* swapPairs(ListNode* head) {
         auto dummy = new ListNode(-1);
-        auto tail = dummy;
-        auto cur = head;
-        if(!cur or !cur->next){
-            return head;
+        auto tail = dummy, cur = head;
+        while(cur){
+        ListNode *temp = NULL;
+            if(cur->next){
+                tail->next = cur->next;
+                tail = cur->next;
+                temp = tail->next;
+            }
+                tail->next = cur;
+                tail = cur;
+                cur = temp;
         }
-        while(cur and cur->next){
-            auto nxt = cur->next->next;
-            tail->next = cur->next;
-            tail = tail->next;
-            tail->next = cur;
-            tail = tail->next;
-            cur = nxt;
-        }
-        if(cur){
-            tail->next = cur;
-            tail = tail->next;
-        }
-
         tail->next = NULL;
         return dummy->next;
     }
