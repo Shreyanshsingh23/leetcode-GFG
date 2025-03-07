@@ -17,7 +17,7 @@ public:
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
-        map<Node*,Node*> mp;
+        unordered_map<Node*,Node*> mp;
         auto dummy = new Node(-1);
         auto tail = dummy;
         auto cur = head;
