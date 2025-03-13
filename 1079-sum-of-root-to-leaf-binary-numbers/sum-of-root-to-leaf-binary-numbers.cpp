@@ -12,14 +12,14 @@
 class Solution {
 public:
 
-    int calculate(string& str){
-        cout << str << ' ';
-        auto s = str;
-        reverse(s.begin(),s.end());
+    int calculate(string& s){
+        cout << s << ' ';
+        // auto s = str;
+        // reverse(s.begin(),s.end());
         int ans = 0;
         int p = 0;
         for(auto e : s){
-            ans += (e-'0') * (1 << p);
+            ans = ans*2 + (e-'0');
             p++;
         }
         cout << ans << '\n';
