@@ -11,41 +11,21 @@
  */
 class Solution {
 public:
+    int ans = 0;
 
-    int calculate(string& s){
-        cout << s << ' ';
-        // auto s = str;
-        // reverse(s.begin(),s.end());
-        int ans = 0;
-        int p = 0;
-        for(auto e : s){
-            ans = ans*2 + (e-'0');
-            p++;
-        }
-        cout << ans << '\n';
-        return ans;
-    }
+    void dfs(TreeNode* root, int cur){
+        if(root == NULL)return;
 
-    int dfs(TreeNode* root, string& s){
+        cur = cur*2 + root->val;
+        if(!root->left and !root->right)
+        ans += cur;
 
-        int ans = 0;
-        s+= (root->val + '0');
-        if(root -> left == NULL and root -> right == NULL){
-            int ans = calculate(s);
-            s.pop_back();
-            return ans;
-        }
-        if(root->left)ans += dfs(root->left,s);
-        if(root->right)ans += dfs(root->right,s);
-        s.pop_back();
-
-        return ans;
+        dfs(root->left,cur);
+        dfs(root->right,cur);
     }
 
     int sumRootToLeaf(TreeNode* root) {
-        string s = "";
-        
-        return dfs(root,s);
-
+        dfs(root,0);
+        return ans;
     }
 };
