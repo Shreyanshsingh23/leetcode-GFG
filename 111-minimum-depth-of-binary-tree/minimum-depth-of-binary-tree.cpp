@@ -14,20 +14,19 @@ public:
 
     int dfs(TreeNode* root)
     {
-        if(root == NULL)return 1e7;
-        if(root->left == NULL and root->right == NULL)return 1;
-        int ans = 1e9;
+        if(root == NULL)return 0;
 
-        ans = min(ans,1+dfs(root->left));
-        ans = min(ans,1+dfs(root->right));
+        if(root->left == NULL)return 1+dfs(root->right);
+        if(root->right == NULL)return 1+dfs(root->left);
 
-        return ans;
+        return 1+min(dfs(root->left),dfs(root->right));
     }
 
     
 
     int minDepth(TreeNode* root) {
-        if(root == NULL)return 0;
+        
+        
         return dfs(root);
     }
 };
