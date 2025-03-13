@@ -11,6 +11,8 @@
  */
 class Solution {
 
+    map<TreeNode*,int> mp;
+
     int f(TreeNode* root)
     {
         if(root == NULL)return 0;
@@ -19,15 +21,20 @@ class Solution {
         ans = max(ans,1 + f(root->left));
         ans = max(ans,1 + f(root->right));
 
-        return ans;
+        return mp[root]  = ans;
     }
 
 public:
+ int i = 0;
     bool isBalanced(TreeNode* root) {
+        if(i == 0){
+            int ok = f(root);
+        }
+        i++;
         if(root == NULL)return true;
 
-        int leftHeight = f(root->left);
-        int rightHeight = f(root->right);
+        int leftHeight = mp[root->left];
+        int rightHeight = mp[root->right];
 
         if(abs(leftHeight - rightHeight) > 1)return false;
         int ans = true;
@@ -35,6 +42,7 @@ public:
         ans &= isBalanced(root->right);
 
         return ans;
+        
 
     }
 };
