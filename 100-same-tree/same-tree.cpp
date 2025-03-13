@@ -11,34 +11,21 @@
  */
 class Solution {
 
-        void dfs(TreeNode* root, vector<string>& a){
-            if(root == NULL){
-                a.push_back("NULL");
-                return;
-            }
-
-            a.push_back(to_string(root->val));
-            dfs(root->left,a);
-            dfs(root->right,a);
-        }
-
+    
 public:
     bool isSameTree(TreeNode* p, TreeNode* q) {
-        vector<string> a, b;
-        dfs(p,a);
-        dfs(q,b);
-        
-        while( a.size() and a.back() == "NULL"){
-            a.pop_back();
-        }
+       if(p == NULL and q == NULL)return true;
+       if(p and q == NULL)return false;
+       if(p == NULL and q)return false;
 
-        while(b.size() and b.back() == "NULL"){
-            b.pop_back();
-        }
-        if(a.size() != b.size())return 0;
-        for(int i = 0;i < a.size(); ++i){
-            if(a[i] != b[i])return 0;
-        }
-        return 1;
+       if(p->val != q->val)return false;
+
+       bool leftAns = isSameTree(p->left,q->left);
+       if(leftAns == false)return false;
+       
+       bool rightAns = isSameTree(p->right,q->right);
+       if(rightAns == false)return false;
+
+       return true;
     }
 };
