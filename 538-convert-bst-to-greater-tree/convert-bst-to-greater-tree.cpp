@@ -11,44 +11,147 @@
  */
 class Solution {
 public:
-    vector<int> a;
-    void dfs(TreeNode* root)
-    {
-        if(root == NULL)return;
 
-        a.push_back(root->val);
-        
-        dfs(root->left);
-        dfs(root->right);
-    }
-
+    int ans = 0;
     void f(TreeNode* root)
     {
-        if(root == NULL)return;
-
-        root->val = mp[root->val];
-        
-        f(root->left);
-        f(root->right);
-    }
-
-    map<int,int> mp;
-    TreeNode* convertBST(TreeNode* root) {
-        if(root == NULL)return root;
-
-        dfs(root);
-
-        sort(a.begin(),a.end());
-        mp[a[a.size()-1]] = a[a.size()-1];
-        for(int i = a.size()-2; i >= 0; --i){
-            int val = a[i];
-            a[i] += a[i+1];
-            mp[val] = a[i];
+        if(root == NULL){
+            return;
         }
 
-        f(root);
+        f(root->right);
+        ans += root->val;
+        root->val = ans;
+        f(root->left);
         
-        return root;
+    }
 
+    TreeNode* convertBST(TreeNode* root) {
+        f(root);
+        return root;
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
