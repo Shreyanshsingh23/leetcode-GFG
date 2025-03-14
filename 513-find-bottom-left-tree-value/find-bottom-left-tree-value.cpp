@@ -16,20 +16,18 @@ public:
         
         queue<TreeNode*> q;
         q.push(root);
-        vector<int> ans;
+        int ans = 0;
         while(!q.empty()){
             int n = q.size();
             for(int i = 0; i < n; ++i){
                 auto cur = q.front();
                 q.pop();
-
-                if(i == 0)ans.push_back(cur->val);
-
-                if(cur->left)q.push(cur->left);
+                ans = cur->val;
                 if(cur->right)q.push(cur->right);
+                if(cur->left)q.push(cur->left);
             }
         }
-        for(auto e: ans)cout << e << ' ';
-        return ans.back();
+        
+        return ans;
     }
 };
