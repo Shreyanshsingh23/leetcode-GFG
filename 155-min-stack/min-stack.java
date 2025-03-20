@@ -1,20 +1,25 @@
 class MinStack {
     Stack<Integer> st;
-    PriorityQueue<Integer> p ;
+    Stack<Integer> minStack;
     public MinStack() {
-        this.st = new Stack<Integer>();
-        this.p =  new PriorityQueue<>();
-        
+        this.st = new Stack<>();
+        this.minStack =  new Stack<>();
     }
     
     public void push(int val) {
-        st.push(val);
-        p.add(val);
+        if(minStack.empty() || val <= minStack.peek()){
+            if(!minStack.empty())System.out.println("Curr min before push: " + minStack.peek());
+            minStack.push(val);
+        }
+        st.push(val); 
+
     }
     
     public void pop() {
-        int val = st.peek();
-        p.remove(val);
+
+        // System.out.println(minStack.peek());
+        if(st.peek().equals(minStack.peek()))minStack.pop();
+        // System.out.println(minStack.peek());
         st.pop();
     }
     
@@ -23,7 +28,7 @@ class MinStack {
     }
     
     public int getMin() {
-        return p.peek();
+        return minStack.peek();
     }
 }
 
