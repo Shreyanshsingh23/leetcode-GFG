@@ -17,10 +17,7 @@ class MinStack {
     
     public void pop() {
 
-        // System.out.println(minStack.peek());
-        if(st.peek().equals(minStack.peek()))minStack.pop();
-        // System.out.println(minStack.peek());
-        st.pop();
+        if(st.pop().equals(minStack.peek()))minStack.pop();
     }
     
     public int top() {
