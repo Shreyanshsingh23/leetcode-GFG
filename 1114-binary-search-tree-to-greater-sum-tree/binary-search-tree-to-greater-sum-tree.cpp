@@ -17,9 +17,8 @@ public:
         if(root == NULL)return;
 
          f(root->right);
-         int cur = sum;
          sum += root->val;
-         root->val += cur;
+         root->val = sum;
          f(root->left);
     }
 
