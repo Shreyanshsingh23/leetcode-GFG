@@ -9,26 +9,14 @@
  */
 class Solution {
 public:
-    TreeNode* ans = NULL;
-    pair<bool,bool> f(TreeNode* root, TreeNode* p, TreeNode* q)
-    {
-        if(!root)return {0,0};
-        auto x = f(root->left,p,q), 
-        y = f(root->right,p,q);
-        if(x.first and y.second and !ans){
-            ans = root;
-            return x;
-        }
-        x.first |= y.first;
-        x.second |= y.second;
-        if(root == p)x.first = true;
-        if(root == q)x.second = true;
-        if(x.first and x.second and !ans)ans = root;
-        return x;
-    }
-
+    
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-         f(root,p,q);
-         return ans;
+        if(!root)return nullptr;
+        if(root == p or root == q)return root;
+        auto leftLCA = lowestCommonAncestor(root->left,p,q);
+        auto rightLCA = lowestCommonAncestor(root->right,p,q);
+        if(leftLCA and rightLCA)return root;
+        if(!rightLCA)return leftLCA;
+        return rightLCA;
     }
 };
