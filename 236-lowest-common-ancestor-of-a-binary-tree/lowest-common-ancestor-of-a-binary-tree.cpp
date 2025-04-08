@@ -10,14 +10,11 @@
 class Solution {
 public:
     TreeNode* ans = NULL;
-    pair<bool,bool> f(TreeNode* root, TreeNode* p, TreeNode* q, bool& a, bool& b)
+    pair<bool,bool> f(TreeNode* root, TreeNode* p, TreeNode* q)
     {
         if(!root)return {0,0};
-        // if(root->val == 3){
-        //     cout << a << ' ' << b << '\n';
-        // }
-        auto x = f(root->left,p,q,a,b), 
-        y = f(root->right,p,q,a,b);
+        auto x = f(root->left,p,q), 
+        y = f(root->right,p,q);
         if(x.first and y.second and !ans){
             ans = root;
             return x;
@@ -31,8 +28,7 @@ public:
     }
 
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-       bool a = false, b = false;
-         f(root,p,q,a,b);
+         f(root,p,q);
          return ans;
     }
 };
