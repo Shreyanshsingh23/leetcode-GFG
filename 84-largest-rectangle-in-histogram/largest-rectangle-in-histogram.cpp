@@ -22,10 +22,6 @@ public:
             
             ans = max(ans,a[i]*w);
         }
-        for(auto e: nsl)cout << e << ' ';
-        cout << '\n';
-        for(auto e: nsr)cout << e << ' ';
-        cout << '\n';
         return ans;
     }
 };
