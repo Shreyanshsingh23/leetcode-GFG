@@ -36,11 +36,8 @@ public:
             //find the maximum of LST or minimum of RST
             else{  
                 auto mxx = getMax(root->left);
-                auto right = root->right;
-                auto left = deleteNode(root->left,mxx->val);
-                 root = new TreeNode(mxx->val);
-                 root->right = right;
-                 root->left = left;
+                root->val = mxx->val;
+                root->left = deleteNode(root->left,mxx->val);
                 
             }
         }
