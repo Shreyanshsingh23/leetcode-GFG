@@ -15,10 +15,12 @@ class Node {
 class LRUCache {
     int capacity;
     HashMap<Integer,Node> mp;
-    Node head = null, tail = null;
+    Node head = new Node(-1,-1), tail = new Node(-1,-1);
     public LRUCache(int capacity) {
         this.capacity = capacity;
         this.mp = new HashMap<>();
+        head.next = tail;
+        tail.prev = head;
     }
     
     public int get(int key) {
@@ -47,56 +49,36 @@ class LRUCache {
             //     System.out.println(mp);
             //     System.out.println(tail.key + " " + tail.val);
             // }
-                deleteLru();
+                delete(tail.prev);
             // if(key == 3 && value == 3)System.out.println(mp);
             }
                 insertMru(key,value);
         }
     }
 
-    void deleteLru()
-    {
-        if(tail != null){
-            int key = tail.key;
-            mp.remove(key);
-            if(tail.prev != null){
-                tail.prev.next = null;
-                Node z = tail.prev;
-                tail.next = null;
-                tail.prev = null;
-                tail = z;
-            }else{
-                // is the only element in list
-                head = null;
-                tail = null;
-            }
-        }
-    }
+   
 
     void insertMru(int key, int value)
     {
-        Node newNode = new Node(key,value);
-        mp.put(key,newNode);
-        newNode.next = head;
-        if(head != null){
-            head.prev = newNode;
-        }
-        head = newNode;
-        if(tail == null)tail = newNode;
+        Node node = new Node(key,value);
+        mp.put(key,node);
+        Node temp = head.next;
+        node.next = temp;
+        temp.prev = node;
+
+        head.next = node;
+        node.prev = head;
     }
 
     void delete(Node node)
     {
-        if(node == tail)tail = node.prev;
-        if(node == head)head = node.next;
-        if(node.prev != null){
-            node.prev.next = node.next;
-        }
-        if(node.next != null){
-            node.next.prev = node.prev;
-        }
-        node.prev = null;
+        Node delPrev = node.prev;
+        Node delNext = node.next;
+        delPrev.next = delNext;
+        delNext.prev = delPrev;
         node.next = null;
+        node.prev = null;
+        mp.remove(node.key);
     }
 }
 
