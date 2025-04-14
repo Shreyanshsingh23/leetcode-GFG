@@ -95,8 +95,8 @@ class LRUCache {
         if(node.next != null){
             node.next.prev = node.prev;
         }
-        // node.prev = null;
-        // node.next = null;
+        node.prev = null;
+        node.next = null;
     }
 }
 
