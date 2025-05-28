@@ -33,23 +33,24 @@ public:
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& a, int k) {
-        set<pi> st;
-        int n = a.size();
-        for(int i = 0;i < k; ++i)
+        deque<int> dq;
+        for(int i = 0; i < k; ++i)
         {
-            st.insert({a[i],i});
+            while(!dq.empty() and a[dq.back()] <= a[i])dq.pop_back();
+            dq.pb(i);
         }
+        int n = a.size();
         vector<int> ans;
-        ans.pb(st.rbegin()->first);
+        ans.pb(a[dq.front()]);
 
         for(int i = k; i < n; ++i)
         {
-            st.erase({a[i-k],i-k});
-            st.insert({a[i],i});
-            ans.pb(st.rbegin()->first);
+            if(!dq.empty() and dq.front() == i-k)dq.pop_front();
+            while(!dq.empty() and a[dq.back()] <= a[i])dq.pop_back();
+            dq.pb(i);
+            ans.pb(a[dq.front()]);
         }
 
         return ans;
-
     }
 };
