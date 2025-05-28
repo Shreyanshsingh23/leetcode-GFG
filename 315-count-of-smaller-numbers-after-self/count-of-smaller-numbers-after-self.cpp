@@ -38,7 +38,7 @@ public:
         vector<int> ans(n);
         for(int i = n-1; i >= 0; --i)
         {
-            int x = st.countElementsLessThanX({a[i],-1});
+            int x = st.countElementsLessThanX({a[i],i});
             ans[i] = x;
             st.insert({a[i],i});
         }
