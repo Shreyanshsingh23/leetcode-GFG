@@ -41,12 +41,20 @@ public:
                         if(vis[i+j] == false)
                         {
                             ans[i+j] = 'b';
+                            // kyuki yahi vo position hai jo free bhi hai aur sabse last me bhi hai,
+                            //aur 'b' isliye daal rhe kyuki already free thi mtlb pehle se 'a' rha hoga jo s2[i+b]
+                            // ke barabar ho rha tha isliye 'b'
                             vis[i+j] = true;
                             free = false;
                             break;
                         }
                     }
                     if(free)return "";
+                }
+                else
+                {
+                    //agr interval equal nhi hai toh koi dikkat nhi hai kyuki already baaki me 'a' hi pada hai jo sabse chota 
+                    // hai isliye hum kuch change nhi kar rhe
                 }
             }
         }
